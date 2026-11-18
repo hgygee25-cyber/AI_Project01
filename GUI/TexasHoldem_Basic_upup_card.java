@@ -6,7 +6,6 @@ import java.awt.*;
 import java.util.Random;
 
 public class TexasHoldem_Basic_upup_card {
-
     static Random rand = new Random();
 
     public static void animateCard(JLabel card, ImageIcon image, Runnable after) {
@@ -43,10 +42,8 @@ public class TexasHoldem_Basic_upup_card {
                 timer.stop();
 
                 parent.remove(movingCard);
-
                 card.setIcon(image);
                 card.setVisible(true);
-
                 parent.repaint();
 
                 if (after != null) {
@@ -54,7 +51,6 @@ public class TexasHoldem_Basic_upup_card {
                 }
             }
         });
-
         timer.start();
     }
 
@@ -72,14 +68,8 @@ public class TexasHoldem_Basic_upup_card {
 
         TexasHoldem.choosed_card.add(value);
 
-        ImageIcon original1 = GUI_1.Cardandimageswitch.Card(
-                random_suit1, random_rank1
-        );
-        Image scaledImage = original1.getImage().getScaledInstance(
-                65, 110, Image.SCALE_SMOOTH
-        );
-
-        animateCard(TexasHoldem.card_community5,
-                new ImageIcon(scaledImage), null);
+        ImageIcon original1 = GUI_1.Cardandimageswitch.Card(random_suit1, random_rank1);
+        Image scaledImage = original1.getImage().getScaledInstance(65, 110, Image.SCALE_SMOOTH);
+        animateCard(TexasHoldem.card_community5, new ImageIcon(scaledImage), null);
     }
 }

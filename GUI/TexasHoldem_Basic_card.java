@@ -1,4 +1,3 @@
-
 package GUI;
 
 import javax.swing.*;
@@ -65,9 +64,7 @@ public class TexasHoldem_Basic_card {
         TexasHoldem.choosed_card.add(value);
 
         ImageIcon original1 = GUI_1.Cardandimageswitch.Card(4, 0);
-        Image scaledImage = original1.getImage().getScaledInstance(
-                65, 110, Image.SCALE_SMOOTH
-        );
+        Image scaledImage = original1.getImage().getScaledInstance(65, 110, Image.SCALE_SMOOTH);
         TexasHoldem.card_com1.setIcon(new ImageIcon(scaledImage));
 
         int random_suit2;
@@ -83,9 +80,7 @@ public class TexasHoldem_Basic_card {
         TexasHoldem.choosed_card.add(value2);
 
         ImageIcon original2 = GUI_1.Cardandimageswitch.Card(4, 0);
-        Image scaledImage2 = original2.getImage().getScaledInstance(
-                65, 110, Image.SCALE_SMOOTH
-        );
+        Image scaledImage2 = original2.getImage().getScaledInstance(65, 110, Image.SCALE_SMOOTH);
         TexasHoldem.card_com2.setIcon(new ImageIcon(scaledImage2));
     }
 
@@ -103,12 +98,8 @@ public class TexasHoldem_Basic_card {
 
         TexasHoldem.choosed_card.add(value);
 
-        ImageIcon original1 = GUI_1.Cardandimageswitch.Card(
-                random_suit1, random_rank1
-        );
-        Image scaledImage1 = original1.getImage().getScaledInstance(
-                65, 110, Image.SCALE_SMOOTH
-        );
+        ImageIcon original1 = GUI_1.Cardandimageswitch.Card(random_suit1, random_rank1);
+        Image scaledImage1 = original1.getImage().getScaledInstance(65, 110, Image.SCALE_SMOOTH);
         TexasHoldem.card_user1.setIcon(new ImageIcon(scaledImage1));
 
         int random_suit2;
@@ -123,12 +114,8 @@ public class TexasHoldem_Basic_card {
 
         TexasHoldem.choosed_card.add(value2);
 
-        ImageIcon original2 = GUI_1.Cardandimageswitch.Card(
-                random_suit2, random_rank2
-        );
-        Image scaledImage2 = original2.getImage().getScaledInstance(
-                65, 110, Image.SCALE_SMOOTH
-        );
+        ImageIcon original2 = GUI_1.Cardandimageswitch.Card(random_suit2, random_rank2);
+        Image scaledImage2 = original2.getImage().getScaledInstance(65, 110, Image.SCALE_SMOOTH);
         TexasHoldem.card_user2.setIcon(new ImageIcon(scaledImage2));
     }
 
@@ -146,12 +133,8 @@ public class TexasHoldem_Basic_card {
 
         TexasHoldem.choosed_card.add(value);
 
-        ImageIcon original1 = GUI_1.Cardandimageswitch.Card(
-                random_suit1, random_rank1
-        );
-        Image scaledImage1 = original1.getImage().getScaledInstance(
-                65, 110, Image.SCALE_SMOOTH
-        );
+        ImageIcon original1 = GUI_1.Cardandimageswitch.Card(random_suit1, random_rank1);
+        Image scaledImage1 = original1.getImage().getScaledInstance(65, 110, Image.SCALE_SMOOTH);
 
         int random_suit2;
         int random_rank2;
@@ -165,12 +148,8 @@ public class TexasHoldem_Basic_card {
 
         TexasHoldem.choosed_card.add(value2);
 
-        ImageIcon original2 = GUI_1.Cardandimageswitch.Card(
-                random_suit2, random_rank2
-        );
-        Image scaledImage2 = original2.getImage().getScaledInstance(
-                65, 110, Image.SCALE_SMOOTH
-        );
+        ImageIcon original2 = GUI_1.Cardandimageswitch.Card(random_suit2, random_rank2);
+        Image scaledImage2 = original2.getImage().getScaledInstance(65, 110, Image.SCALE_SMOOTH);
 
         int random_suit3;
         int random_rank3;
@@ -184,19 +163,12 @@ public class TexasHoldem_Basic_card {
 
         TexasHoldem.choosed_card.add(value3);
 
-        ImageIcon original3 = GUI_1.Cardandimageswitch.Card(
-                random_suit3, random_rank3
-        );
-        Image scaledImage3 = original3.getImage().getScaledInstance(
-                65, 110, Image.SCALE_SMOOTH
-        );
+        ImageIcon original3 = GUI_1.Cardandimageswitch.Card(random_suit3, random_rank3);
+        Image scaledImage3 = original3.getImage().getScaledInstance(65, 110, Image.SCALE_SMOOTH);
 
-        animateCard(TexasHoldem.card_community1,
-                new ImageIcon(scaledImage1), () -> {
-            animateCard(TexasHoldem.card_community2,
-                    new ImageIcon(scaledImage2), () -> {
-                animateCard(TexasHoldem.card_community3,
-                        new ImageIcon(scaledImage3), null);
+        animateCard(TexasHoldem.card_community1,new ImageIcon(scaledImage1), () -> {
+            animateCard(TexasHoldem.card_community2, new ImageIcon(scaledImage2), () -> {
+                animateCard(TexasHoldem.card_community3, new ImageIcon(scaledImage3), null);
             });
         });
     }

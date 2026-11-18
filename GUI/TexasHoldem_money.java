@@ -5,14 +5,11 @@ import javax.swing.*;
 import java.awt.*;
 
 public class TexasHoldem_money extends JPanel {
-
-    private final JLabel[][] stageLabels = new JLabel[4][2];
-    private final JLabel[] totalLabels = new JLabel[2];
-
-    private final String[] stageNames = {
-        "PREFLOP", "FLOP", "TURN", "RIVER"
-    };
-
+    //
+    public final JLabel[][] stageLabels = new JLabel[4][2];
+    public final JLabel[] totalLabels = new JLabel[2];
+    public final String[] stageNames = {"PREFLOP", "FLOP", "TURN", "RIVER"};
+    //
     public TexasHoldem_money() {
         setBounds(705, 385, 270, 155);
         setLayout(null);
@@ -65,8 +62,7 @@ public class TexasHoldem_money extends JPanel {
     }
 
     // 1. 금액 JLabel 생성
-    private JLabel createValueLabel(int x, int y) {
-
+    public JLabel createValueLabel(int x, int y) {
         JLabel label = new JLabel("0", SwingConstants.CENTER);
 
         label.setBounds(x, y, 55, 18);
@@ -77,37 +73,23 @@ public class TexasHoldem_money extends JPanel {
     }
 
     // 2. 특정 단계 베팅 금액 변경
-    public void setStageMoney(
-            int stage,
-            int comAmount,
-            int userAmount
-    ) {
-
+    public void setStageMoney(int stage, int comAmount, int userAmount) {
         if (stage < 0 || stage >= 4) {
             return;
         }
 
-        stageLabels[stage][0].setText(
-                String.valueOf(comAmount)
-        );
-
-        stageLabels[stage][1].setText(
-                String.valueOf(userAmount)
-        );
-
+        stageLabels[stage][0].setText(String.valueOf(comAmount));
+        stageLabels[stage][1].setText(String.valueOf(userAmount));
         updateTotals();
     }
 
     // 3. 전체 베팅 금액 계산
     public void updateTotals() {
-
         int comTotal = 0;
         int userTotal = 0;
 
         for (int i = 0; i < 4; i++) {
-
             comTotal += parse(stageLabels[i][0].getText());
-
             userTotal += parse(stageLabels[i][1].getText());
         }
 
@@ -116,8 +98,7 @@ public class TexasHoldem_money extends JPanel {
     }
 
     // 4. 문자열 숫자 변환
-    private int parse(String value) {
-
+    public int parse(String value) {
         try {
             return Integer.parseInt(value);
         } catch (NumberFormatException e) {
@@ -127,7 +108,6 @@ public class TexasHoldem_money extends JPanel {
 
     // 5. 새로운 판 시작 시 초기화
     public void resetAmounts() {
-
         for (int i = 0; i < 4; i++) {
             stageLabels[i][0].setText("0");
             stageLabels[i][1].setText("0");
@@ -139,22 +119,11 @@ public class TexasHoldem_money extends JPanel {
     // 6. 패널 배경
     @Override
     protected void paintComponent(Graphics g) {
-
         super.paintComponent(g);
-
         Graphics2D g2 = (Graphics2D) g.create();
-
-        g2.setRenderingHint(
-                RenderingHints.KEY_ANTIALIASING,
-                RenderingHints.VALUE_ANTIALIAS_ON
-        );
-
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setColor(new Color(0, 0, 0, 180));
-
-        g2.fillRoundRect(
-                0, 0, getWidth(), getHeight(), 25, 25
-        );
-
+        g2.fillRoundRect(0, 0, getWidth(), getHeight(), 25, 25);
         g2.dispose();
     }
 }

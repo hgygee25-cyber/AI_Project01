@@ -27,6 +27,7 @@ public class GUI_00 extends JFrame {
     public static TexasHoldem_donon g4_donon;
     public static TexasHoldem_money g4_money;
     public static TexasHoldem_money_User g4_money_user;
+    public static TexasHoldem_money_Com g4_money_com;
     public static first_frame_store g;
     public static first_frame_store2 gg;
     public static first_frame_chip gg1;
@@ -64,6 +65,7 @@ public class GUI_00 extends JFrame {
         g4_donon = new TexasHoldem_donon();
         g4_money = new TexasHoldem_money();
         g4_money_user = new TexasHoldem_money_User();
+        g4_money_com = new TexasHoldem_money_Com(); 
         gg1 = new first_frame_chip();
         contentpane.add(gg1);
         contentpane.add(gg);
@@ -71,6 +73,7 @@ public class GUI_00 extends JFrame {
         contentpane.add(g4_donon);
         contentpane.add(g4_money);
         contentpane.add(g4_money_user);
+        contentpane.add(g4_money_com);
         contentpane.add(g4);
         contentpane.add(g4_end);
         contentpane.add(g1_2_4);
@@ -114,7 +117,8 @@ public class GUI_00 extends JFrame {
         g4_donon.setVisible(false);
         g4_money.setVisible(false);
         g4_money_user.setVisible(false);
-        
+        g4_money_com.setVisible(false);
+
         ImageIcon icon1 = new ImageIcon("image/배경01_1.png");
 		Image image1 = icon1.getImage();
 		Image scaledimage1 = image1.getScaledInstance(1072,598, Image.SCALE_SMOOTH);

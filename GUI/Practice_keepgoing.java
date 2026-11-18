@@ -53,13 +53,11 @@ public class Practice_keepgoing extends JPanel {
                 JOptionPane.showMessageDialog(null, "연습 홀덤 게임에서는 이어서 게임을 진행할 수 없습니다.", "알림", JOptionPane.INFORMATION_MESSAGE);
             }
         });
-        
         addMouseListener(new MouseAdapter() {});
     }
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
         g.setColor(new Color(255, 255, 255, 130)); 
         g.fillRect(0, 0, getWidth(), getHeight());
     }

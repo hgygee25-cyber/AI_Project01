@@ -1,18 +1,18 @@
 package GUI;
 
 public class TexasHoldemMoney {
-    private int userMoney;
-    private int comMoney;
+    public int userMoney;
+    public static int comMoney;
     // 현재 베팅 라운드에서 각자 낸 금액
-    private int userBet;
-    private int comBet;
-    private int pot;
-    private int chipsBefore;
-    private boolean gameEnded;
+    public int userBet;
+    public int comBet;
+    public int pot;
+    public int chipsBefore;
+    public boolean gameEnded;
 
     public TexasHoldemMoney() {
         userMoney = TextDatabase.getUserChips();
-        comMoney = 50000;
+        comMoney = TextDatabase.getComMoney();
         startNewHand();
     }
 

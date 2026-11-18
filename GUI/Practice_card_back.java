@@ -22,8 +22,8 @@ public class Practice_card_back {
         // 15ms마다 실행되는 애니메이션 타이머
         Timer timer = new Timer(15, new ActionListener() {
             int currentW = origW;
-            boolean shrinking = true; // true: 줄어드는 중, false: 커지는 중
-            int speed = Math.max(1, origW / 10); // 10프레임 만에 절반이 돌도록 속도 자동 계산
+            boolean shrinking = true;
+            int speed = Math.max(1, origW / 10);
 
             @Override
             public void actionPerformed(ActionEvent e) {

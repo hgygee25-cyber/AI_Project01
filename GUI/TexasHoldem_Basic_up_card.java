@@ -1,4 +1,3 @@
-
 package GUI;
 
 import javax.swing.*;
@@ -72,14 +71,8 @@ public class TexasHoldem_Basic_up_card {
 
         TexasHoldem.choosed_card.add(value);
 
-        ImageIcon original1 = GUI_1.Cardandimageswitch.Card(
-                random_suit1, random_rank1
-        );
-        Image scaledImage = original1.getImage().getScaledInstance(
-                65, 110, Image.SCALE_SMOOTH
-        );
-
-        animateCard(TexasHoldem.card_community4,
-                new ImageIcon(scaledImage), null);
+        ImageIcon original1 = GUI_1.Cardandimageswitch.Card(random_suit1, random_rank1);
+        Image scaledImage = original1.getImage().getScaledInstance(65, 110, Image.SCALE_SMOOTH);
+        animateCard(TexasHoldem.card_community4,new ImageIcon(scaledImage), null);
     }
 }

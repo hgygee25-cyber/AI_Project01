@@ -169,20 +169,12 @@ public class TexasHoldem extends JPanel {
     }
 
     class ProbabilityGraph extends JPanel {
-
-        // 현재 그래프 길이
         double userCurrent = 0;
         double comCurrent = 0;
         double drawCurrent = 0;
-
-
-        // 목표 그래프 길이
         double userTarget = 0;
         double comTarget = 0;
         double drawTarget = 0;
-
-
-        // 부드러운 애니메이션
         Timer timer;
 
         public ProbabilityGraph() {
@@ -208,16 +200,7 @@ public class TexasHoldem extends JPanel {
             });
         }
 
-        // =================================
-        // 새로운 승률 입력
-        // =================================
-
-        public void setProbability(
-                double user,
-                double com,
-                double draw
-        ) {
-
+        public void setProbability(double user, double com, double draw) {
             userTarget = Math.max(0, Math.min(100, user));
             comTarget = Math.max(0, Math.min(100, com));
             drawTarget = Math.max(0, Math.min(100, draw));
@@ -225,138 +208,37 @@ public class TexasHoldem extends JPanel {
             timer.start();
         }
 
-
-        // =================================
-        // 그래프 그리기
-        // =================================
-
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             Graphics2D g2 = (Graphics2D) g.create();
 
-            g2.setRenderingHint(
-                    RenderingHints.KEY_ANTIALIASING,
-                    RenderingHints.VALUE_ANTIALIAS_ON
-            );
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2.setColor(new Color(24, 35, 31, 220));
+            g2.fillRoundRect(0, 0, getWidth(), getHeight(),20, 20);
+            g2.setFont(new Font("Serif", Font.BOLD, 20));
+            g2.setColor(new Color(238, 215, 174));
+            g2.drawString("WIN PROBABILITY",18, 32);
 
-            // 그래프 배경
-            g2.setColor(
-                    new Color(24, 35, 31, 220)
-            );
-
-            g2.fillRoundRect(
-                    0, 0,
-                    getWidth(),
-                    getHeight(),
-                    20, 20
-            );
-
-
-            // 제목
-            g2.setFont(
-                    new Font("Serif", Font.BOLD, 20)
-            );
-
-            g2.setColor(
-                    new Color(238, 215, 174)
-            );
-
-            g2.drawString(
-                    "WIN PROBABILITY",
-                    18, 32
-            );
-
-
-            // =================================
-            // 사용자
-            // =================================
-
-            drawBar(
-                    g2,
-                    "USER",
-                    userCurrent,
-                    new Color(80, 190, 130),
-                    65
-            );
-
-
-            // =================================
-            // 컴퓨터
-            // =================================
-
-            drawBar(
-                    g2,
-                    "COM",
-                    comCurrent,
-                    new Color(220, 100, 90),
-                    125
-            );
-
-
-            // =================================
-            // 무승부
-            // =================================
-
-            drawBar(
-                    g2,
-                    "DRAW",
-                    drawCurrent,
-                    new Color(220, 175, 80),
-                    185
-            );
-
+            drawBar(g2, "USER", userCurrent, new Color(80, 190, 130),65);
+            drawBar(g2, "COM",comCurrent, new Color(220, 100, 90), 125);
+            drawBar(g2, "DRAW", drawCurrent, new Color(220, 175, 80), 185);
 
             g2.dispose();
         }
 
-
-        // =================================
-        // 각각의 막대그래프
-        // =================================
-
-        public void drawBar(
-                Graphics2D g2,
-                String name,
-                double value,
-                Color color,
-                int y
-        ) {
-
-        // 이름
-        g2.setFont(
-                new Font("맑은 고딕", Font.BOLD, 13)
-        );
-
-            g2.setColor(
-                    new Color(248, 239, 218)
-            );
-
-            g2.drawString(
-                    name,
-                    18, y
-            );
-
-
-            // 확률 숫자
-            g2.setFont(
-                    new Font("Serif", Font.BOLD, 17)
-            );
-
+        public void drawBar(Graphics2D g2, String name, double value, Color color, int y) {
+            g2.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+            g2.setColor(new Color(248, 239, 218));
+            g2.drawString(name,18, y);
+            g2.setFont(new Font("Serif", Font.BOLD, 17));
             g2.setColor(color);
-
-            g2.drawString(
-                    String.format("%.1f%%", value),
-                    205, y
-            );
-
-
-            // 막대 배경
+            g2.drawString(String.format("%.1f%%", value),205, y);
             g2.setColor(new Color(90, 90, 80));
             g2.fillRoundRect(18, y + 10, 235, 13, 13, 13);
-            // 막대 길이
+            
             int barWidth = (int) (235 * value / 100.0);
-            // 실제 확률 막대
+            
             g2.setColor(color);
             if (barWidth > 0) {
                 g2.fillRoundRect(18, y + 10, barWidth, 13, 13, 13);
@@ -366,11 +248,10 @@ public class TexasHoldem extends JPanel {
     //
     public TexasHoldem() {
         System.out.println("Practice_Texas_Hold'em ------> Practice Texas Hold'em");
-
         setBounds(0, 0, 1072,598);
-		setLayout(null);
+        setLayout(null);
         setOpaque(false);
-        // 배분
+        
         suit.clear();
         rank.clear();
 
@@ -394,7 +275,6 @@ public class TexasHoldem extends JPanel {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-
                 g.setColor(new Color(0, 0, 0, 180));
                 g.fillRect(0, 0, getWidth(), getHeight());
             }
@@ -415,9 +295,9 @@ public class TexasHoldem extends JPanel {
 
         overlayPanel.add(startButton);
 
-         card_com1 = new JLabel("");
-            card_com1.setBounds(470, 140, 65, 110);
-            add(card_com1);
+        card_com1 = new JLabel("");
+        card_com1.setBounds(470, 140, 65, 110);
+        add(card_com1);
 
             card_com2 = new JLabel("");
             card_com2.setBounds(540, 140, 65, 110);
@@ -595,12 +475,7 @@ public class TexasHoldem extends JPanel {
 
             // 1. 로그인 확인
             if (!TextDatabase.isLoggedIn()) {
-                JOptionPane.showMessageDialog(
-                        this,
-                        "로그인이 필요합니다.",
-                        "로그인 안내",
-                        JOptionPane.INFORMATION_MESSAGE
-                );
+                JOptionPane.showMessageDialog(this, "로그인이 필요합니다.", "로그인 안내", JOptionPane.INFORMATION_MESSAGE);
                 return;
             }
 
@@ -637,14 +512,11 @@ public class TexasHoldem extends JPanel {
             TexasHoldem_Betting.reset();
             GUI_00.g4_money.resetAmounts();
             GUI_00.g4_money_user.updateMoney(money.getUserMoney());
+            GUI_00.g4_money_com.updateMoney(money.getComMoney());
 
-            System.out.println(
-                    "현재 사용자: " + TextDatabase.getUserName()
-            );
 
-            System.out.println(
-                    "사용자 보유 칩: " + money.getUserMoney()
-            );
+            System.out.println("현재 사용자: " + TextDatabase.getUserName());
+            System.out.println("사용자 보유 칩: " + money.getUserMoney());
 
             // 5. 시작 화면 숨기기
             startButton.setEnabled(false);
@@ -668,12 +540,7 @@ public class TexasHoldem extends JPanel {
             comCardList.add(choosed_card.get(1));
             comCardList.add(choosed_card.get(0));
 
-            Practice_Preflop_Percent probability =
-                    Practice_Preflop_Percent.calculate(
-                            userCardList,
-                            comCardList
-                    );
-
+            Practice_Preflop_Percent probability = Practice_Preflop_Percent.calculate(userCardList, comCardList);
             System.out.println(probability.getResult());
 
             double userPercent = probability.getUserProbability();
@@ -693,6 +560,7 @@ public class TexasHoldem extends JPanel {
             GUI_00.g4_donon.setVisible(true);
             GUI_00.g4_money.setVisible(false);
             GUI_00.g4_money_user.setVisible(true);
+            GUI_00.g4_money_com.setVisible(true);
             setUserActionsEnabled(false);
             repaint();
         });

@@ -1,49 +1,29 @@
-
 package GUI;
 
 import GUI_1.WinnerJudge;
 import java.util.*;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 
 public class TexasHoldem_End extends JPanel {
-
-    // 1. 결과 표시
     static JLabel label1;
     static JLabel label2;
     static JLabel label3;
 
     // 2. 승패 판정
     public static void checkWinner() {
-
-        if (TexasHoldem.usercards == null
-                || TexasHoldem.comcards == null
-                || TexasHoldem.communitycards == null) {
+        if (TexasHoldem.usercards == null || TexasHoldem.comcards == null || TexasHoldem.communitycards == null) {
             return;
         }
-
-        if (TexasHoldem.usercards.size() != 2
-                || TexasHoldem.comcards.size() != 2
-                || TexasHoldem.communitycards.size() != 5) {
+        if (TexasHoldem.usercards.size() != 2 || TexasHoldem.comcards.size() != 2|| TexasHoldem.communitycards.size() != 5) {
             return;
         }
 
         try {
-
-            Map<String, Object> result = WinnerJudge.compare(
-                    TexasHoldem.usercards,
-                    TexasHoldem.comcards,
-                    TexasHoldem.communitycards
-            );
-
+            Map<String, Object> result = WinnerJudge.compare(TexasHoldem.usercards, TexasHoldem.comcards, TexasHoldem.communitycards);
             String winner = (String) result.get("winner");
-
-            Map<String, Object> playerHand =
-                    (Map<String, Object>) result.get("player_hand");
-
-            Map<String, Object> computerHand =
-                    (Map<String, Object>) result.get("computer_hand");
+            Map<String, Object> playerHand = (Map<String, Object>) result.get("player_hand");
+            Map<String, Object> computerHand = (Map<String, Object>) result.get("computer_hand");
 
             String playerName = (String) playerHand.get("name");
             String computerName = (String) computerHand.get("name");
@@ -55,16 +35,8 @@ public class TexasHoldem_End extends JPanel {
             label1.setText(winner);
             label2.setText("USER : " + playerName);
             label3.setText("COM : " + computerName);
-
-            // 실제 게임 칩 정산은 베팅 시스템 연결 후 호출
-
         } catch (IllegalArgumentException e) {
-            JOptionPane.showMessageDialog(
-                    null,
-                    e.getMessage(),
-                    "카드 판정 오류",
-                    JOptionPane.ERROR_MESSAGE
-            );
+            JOptionPane.showMessageDialog(null, e.getMessage(), "카드 판정 오류", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -76,22 +48,18 @@ public class TexasHoldem_End extends JPanel {
         GUI_00.g4_donon.setVisible(false);
         GUI_00.g4_money.setVisible(false);
         GUI_00.g4_money_user.setVisible(false);
+        GUI_00.g4_money_com.setVisible(false);
         GUI_00.g4_end.setVisible(true);
         GUI_00.g4_end.repaint();
     }
 
     // 3. 생성자
     public TexasHoldem_End() {
-
         setBounds(0, 0, 1072, 598);
         setLayout(null);
         setOpaque(false);
 
-        JLabel endLabel = new JLabel(
-                "GAME RESULT",
-                SwingConstants.CENTER
-        );
-
+        JLabel endLabel = new JLabel("GAME RESULT", SwingConstants.CENTER);
         endLabel.setBounds(0, 170, 1072, 80);
         endLabel.setFont(new Font("맑은 고딕", Font.BOLD, 45));
         endLabel.setForeground(Color.WHITE);
@@ -103,11 +71,7 @@ public class TexasHoldem_End extends JPanel {
         label1.setForeground(new Color(235, 200, 140));
         label1.setOpaque(true);
         label1.setBackground(new Color(45, 35, 30));
-        label1.setBorder(
-                BorderFactory.createLineBorder(
-                        new Color(235, 200, 140), 2
-                )
-        );
+        label1.setBorder(BorderFactory.createLineBorder(new Color(235, 200, 140), 2));
         add(label1);
 
         label2 = new JLabel("", SwingConstants.CENTER);
@@ -124,7 +88,7 @@ public class TexasHoldem_End extends JPanel {
 
         // 4. 홈으로 돌아가기
         JButton backButton = new JButton("BACK TO HOME");
-        backButton.setBounds(411, 490, 250, 50);
+        backButton.setBounds(280, 490, 250, 50);
         backButton.setFont(new Font("맑은 고딕", Font.BOLD, 18));
         backButton.setForeground(Color.WHITE);
         backButton.setBackground(new Color(190, 145, 65));
@@ -132,20 +96,48 @@ public class TexasHoldem_End extends JPanel {
         backButton.setBorderPainted(false);
         add(backButton);
 
+        JButton backButton2 = new JButton("KEEP PLAYING");
+        backButton2.setBounds(570, 490, 250, 50);
+        backButton2.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+        backButton2.setForeground(Color.WHITE);
+        backButton2.setBackground(new Color(190, 65, 65));
+        backButton2.setFocusPainted(false);
+        backButton2.setBorderPainted(false);
+        add(backButton2);
+
         backButton.addActionListener(e -> {
+            TextDatabase.clearComMoney();
+            TexasHoldemMoney.comMoney = 50000;
             GUI_00.g4_end.setVisible(false);
             GUI_00.g4.setVisible(false);
             TexasHoldem.returnToStart();
             GUI_00.g0.setVisible(true);
             first_frame_store.username(TextDatabase.getUserName());
         });
+
+        backButton2.addActionListener(e -> {
+            if(TexasHoldemMoney.comMoney <= 0){
+                JOptionPane.showMessageDialog(null, "컴퓨터 칩이 모두 소진되었습니다. 게임을 종료합니다.", "게임 종료", JOptionPane.INFORMATION_MESSAGE);
+                TextDatabase.clearComMoney();
+                TexasHoldemMoney.comMoney = 50000;
+                GUI_00.g4_end.setVisible(false);
+                GUI_00.g4.setVisible(false);
+                TexasHoldem.returnToStart();
+                GUI_00.g0.setVisible(true);
+                first_frame_store.username(TextDatabase.getUserName());
+                return;
+            }else{
+                GUI_00.g4_end.setVisible(false);
+                GUI_00.g4.setVisible(true);
+                TextDatabase.saveComMoney(TexasHoldemMoney.comMoney);
+                TexasHoldem.returnToStart();
+            }
+        });
     }
 
-    // 5. 배경
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
         g.setColor(new Color(0, 0, 0, 190));
         g.fillRect(0, 0, getWidth(), getHeight());
     }

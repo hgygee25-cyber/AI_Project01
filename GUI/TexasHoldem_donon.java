@@ -4,9 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class TexasHoldem_donon extends JPanel {
-
-    private JButton bettingButton;
-    private JButton foldButton;
+    public JButton bettingButton;
+    public JButton foldButton;
 
     public TexasHoldem_donon() {
         setBounds(380, 180, 310, 205);
@@ -14,10 +13,7 @@ public class TexasHoldem_donon extends JPanel {
         setBackground(new Color(25, 25, 25));
         setBorder(BorderFactory.createLineBorder(new Color(190, 145, 65), 2));
 
-        JLabel message = new JLabel(
-                "<html><center>KEEP PLAYING THE GAME?<br><br>Betting Fee : 1,000</center></html>",
-                SwingConstants.CENTER
-        );
+        JLabel message = new JLabel("<html><center>KEEP PLAYING THE GAME?<br><br>Betting Fee : 1,000</center></html>",SwingConstants.CENTER);
         message.setBounds(10, 10, 290, 105);
         message.setFont(new Font("Serif", Font.BOLD, 19));
         message.setForeground(Color.WHITE);
@@ -37,7 +33,7 @@ public class TexasHoldem_donon extends JPanel {
         foldButton.addActionListener(e -> foldBeforeFlop());
     }
 
-    private void styleButton(JButton button) {
+    public void styleButton(JButton button) {
         button.setFont(new Font("Serif", Font.BOLD, 14));
         button.setBackground(new Color(190, 145, 65));
         button.setForeground(Color.WHITE);
@@ -45,11 +41,11 @@ public class TexasHoldem_donon extends JPanel {
         button.setBorderPainted(false);
     }
 
-    private void startBetting() {
+    public void startBetting() {
         TexasHoldem_Betting.startAfterPreflop();
     }
 
-    private void foldBeforeFlop() {
+    public void foldBeforeFlop() {
         TexasHoldem_Betting.foldBeforeFlop();
     }
 }

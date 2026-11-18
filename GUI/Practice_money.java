@@ -23,20 +23,12 @@ public class Practice_money extends JPanel{
     static int sum_com;
     //
     public static int updateTotalUser() {
-        sum_user = parseMoney(bettingmoney.getText()) 
-                + parseMoney(flopmoney.getText()) 
-                + parseMoney(turnmoney.getText()) 
-                + parseMoney(rivermoney.getText());
-                
+        sum_user = parseMoney(bettingmoney.getText()) + parseMoney(flopmoney.getText()) + parseMoney(turnmoney.getText()) + parseMoney(rivermoney.getText());
         totaluser.setText(String.valueOf(sum_user));
         return sum_user;
     }
     public static void updateTotalcom() {
-        sum_com = parseMoney(bettingmoneycom.getText()) 
-                + parseMoney(comflopmoney.getText()) 
-                + parseMoney(comturnmoney.getText()) 
-                + parseMoney(comrivermoney.getText());
-                
+        sum_com = parseMoney(bettingmoneycom.getText()) + parseMoney(comflopmoney.getText()) + parseMoney(comturnmoney.getText()) + parseMoney(comrivermoney.getText());
         totalcom.setText(String.valueOf(sum_com));
     }
     public static int parseMoney(String text) {

@@ -12,9 +12,10 @@ import login.GUI_01;
 
 public class TextDatabase {
     // 1. 데이터 파일 경로
-    private static final String DATA_FOLDER = "data";
-    private static final String CHIPS_FILE = "data/user_chips.txt";
-    private static final String RECORDS_FILE = "data/texas_records.txt";
+    public static final String data = "data";
+    public static final String chipfile = "data/user_chips.txt";
+    public static final String recordss = "data/texas_records.txt";
+    public static String com_money = "data/com_money.txt";
 
     // 2. 사용자 정보 가져오기
     public static String getLoginId() {
@@ -31,9 +32,9 @@ public class TextDatabase {
     }
 
     // 4. 데이터 폴더 및 파일 준비
-    private static void prepareFile(String filePath) {
+    public static void prepareFile(String filePath) {
         try {
-            File folder = new File(DATA_FOLDER);
+            File folder = new File(data);
 
             if (!folder.exists()) {
                 folder.mkdirs();
@@ -57,10 +58,10 @@ public class TextDatabase {
             return 0;
         }
 
-        prepareFile(CHIPS_FILE);
+        prepareFile(chipfile);
         String userName = getUserName();
 
-        try (BufferedReader br = Files.newBufferedReader(Paths.get(CHIPS_FILE), StandardCharsets.UTF_8)) {
+        try (BufferedReader br = Files.newBufferedReader(Paths.get(chipfile), StandardCharsets.UTF_8)) {
             String line;
 
             while ((line = br.readLine()) != null) {
@@ -94,14 +95,14 @@ public class TextDatabase {
             chips = 0;
         }
 
-        prepareFile(CHIPS_FILE);
+        prepareFile(chipfile);
         String userName = getUserName();
         ArrayList<String> lines = new ArrayList<>();
         boolean updated = false;
 
         try {
             // 기존 데이터 읽기
-            try (BufferedReader br = Files.newBufferedReader(Paths.get(CHIPS_FILE), StandardCharsets.UTF_8)) {
+            try (BufferedReader br = Files.newBufferedReader(Paths.get(chipfile), StandardCharsets.UTF_8)) {
                 String line;
 
                 while ((line = br.readLine()) != null) {
@@ -121,7 +122,7 @@ public class TextDatabase {
                 lines.add(userName + "\t" + chips);
             }
 
-            Files.write(Paths.get(CHIPS_FILE), lines, StandardCharsets.UTF_8);
+            Files.write(Paths.get(chipfile), lines, StandardCharsets.UTF_8);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -134,13 +135,13 @@ public class TextDatabase {
             return;
         }
 
-        prepareFile(RECORDS_FILE);
+        prepareFile(recordss);
         String userName = getUserName();
         long time = System.currentTimeMillis();
         String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(time));
         String line = userName + "\t" + date + "\t" + result + "\t" + handName + "\t" + winProbability + "\t" + chipsBefore + "\t" + chipsAfter + "\t" + pot;
 
-        try (BufferedWriter bw = Files.newBufferedWriter(Paths.get(RECORDS_FILE), StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.APPEND)) {
+        try (BufferedWriter bw = Files.newBufferedWriter(Paths.get(recordss), StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.APPEND)) {
             bw.write(line);
             bw.newLine();
         } catch (IOException e) {
@@ -156,10 +157,10 @@ public class TextDatabase {
             return records;
         }
 
-        prepareFile(RECORDS_FILE);
+        prepareFile(recordss);
         String userName = getUserName();
 
-        try (BufferedReader br = Files.newBufferedReader(Paths.get(RECORDS_FILE), StandardCharsets.UTF_8)) {
+        try (BufferedReader br = Files.newBufferedReader(Paths.get(recordss), StandardCharsets.UTF_8)) {
             String line;
 
             while ((line = br.readLine()) != null) {
@@ -189,14 +190,14 @@ public class TextDatabase {
 
     // 10. 게임 기록 데이터 클래스
     public static class GameRecord {
-        private String userName;
-        private long time;
-        private String result;
-        private String handName;
-        private double winProbability;
-        private int chipsBefore;
-        private int chipsAfter;
-        private int pot;
+        public String userName;
+        public long time;
+        public String result;
+        public String handName;
+        public double winProbability;
+        public int chipsBefore;
+        public int chipsAfter;
+        public int pot;
 
         public GameRecord(String userName, long time, String result, String handName, double winProbability, int chipsBefore, int chipsAfter, int pot) {
             this.userName = userName;
@@ -239,6 +240,38 @@ public class TextDatabase {
 
         public int getPot() {
             return pot;
+        }
+    }
+
+    // COM 칩 불러오기
+    public static int getComMoney() {
+        prepareFile(com_money);
+        try (BufferedReader br = Files.newBufferedReader(Paths.get(com_money), StandardCharsets.UTF_8)) {
+            String line = br.readLine();
+            if (line != null && !line.trim().isEmpty()) {
+                return Math.max(0, Integer.parseInt(line.trim()));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 50000;
+    }
+    // COM 칩 저장하기
+    public static void saveComMoney(int chips) {
+        prepareFile(com_money);
+        try (BufferedWriter bw = Files.newBufferedWriter(Paths.get(com_money), StandardCharsets.UTF_8)) {
+            bw.write(String.valueOf(Math.max(0, chips)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    // COM 칩 초기화하기
+    public static void clearComMoney() {
+        prepareFile(com_money);
+        try (BufferedWriter bw = Files.newBufferedWriter(Paths.get(com_money), StandardCharsets.UTF_8)) {
+            bw.write("");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.util.Map;
 import GUI_1.WinnerJudge;
 
-/** TexasHoldem 전용 베팅/라운드 진행 컨트롤러. Practice 클래스는 사용하지 않는다. */
 public  class TexasHoldem_Betting {
     public static  int[] stageUser = new int[4];
     public static  int[] stageCom = new int[4];
@@ -125,9 +124,7 @@ public  class TexasHoldem_Betting {
     public static void fold() {
         TexasHoldemMoney money = currentMoney();
         if (money == null) return;
-        int answer = JOptionPane.showConfirmDialog(GUI_00.g4,
-                "이번 판을 포기하시겠습니까? 현재 팟은 컴퓨터가 가져갑니다.",
-                "FOLD", JOptionPane.YES_NO_OPTION);
+        int answer = JOptionPane.showConfirmDialog(GUI_00.g4, "이번 판을 포기하시겠습니까? 현재 팟은 컴퓨터가 가져갑니다.","FOLD", JOptionPane.YES_NO_OPTION);
         if (answer != JOptionPane.YES_OPTION) return;
         money.settle("COMPUTER_WIN", "FOLD", TexasHoldem.probabilityGraph.userTarget);
         TexasHoldem_End.showResult("COMPUTER_WIN", "FOLD", "- ");
@@ -137,12 +134,9 @@ public  class TexasHoldem_Betting {
     public static void allIn() {
         TexasHoldemMoney money = currentMoney();
         if (money == null) return;
-        int callDue = Math.max(0, money.getComBet() - money.getUserBet());
         int totalToMatch = money.getUserBet() + money.getUserMoney();
-        if (totalToMatch < money.getComBet()
-                || totalToMatch > money.getComBet() + money.getComMoney()) {
-            JOptionPane.showMessageDialog(GUI_00.g4,
-                    "현재 버전은 사이드 팟을 지원하지 않습니다. 컴퓨터가 전액 콜할 수 있는 금액으로 올인해 주세요.");
+        if (totalToMatch < money.getComBet() || totalToMatch > money.getComBet() + money.getComMoney()) {
+            JOptionPane.showMessageDialog(GUI_00.g4, "현재 버전은 사이드 팟을 지원하지 않습니다. 컴퓨터가 전액 콜할 수 있는 금액으로 올인해 주세요.");
             return;
         }
         int amount = money.getUserMoney();
@@ -234,8 +228,7 @@ public  class TexasHoldem_Betting {
         TexasHoldemMoney money = TexasHoldem.money;
         if (money == null || money.isGameEnded()) return;
         try {
-            Map<String, Object> result = WinnerJudge.compare(
-                    TexasHoldem.usercards, TexasHoldem.comcards, TexasHoldem.communitycards);
+            Map<String, Object> result = WinnerJudge.compare(TexasHoldem.usercards, TexasHoldem.comcards, TexasHoldem.communitycards);
             String winner = (String) result.get("winner");
             Map<?, ?> playerHand = (Map<?, ?>) result.get("player_hand");
             Map<?, ?> computerHand = (Map<?, ?>) result.get("computer_hand");
@@ -253,16 +246,39 @@ public  class TexasHoldem_Betting {
     public static void finishHand(String message) {
         roundFinished = true;
         enableActions(false);
-        if (GUI_00.g4_money_user != null && TexasHoldem.money != null)
-            GUI_00.g4_money_user.updateMoney(TexasHoldem.money.getUserMoney());
-        if (message != null) JOptionPane.showMessageDialog(GUI_00.g4, message);
+        if (TexasHoldem.money != null) {
+            if (GUI_00.g4_money_user != null) {
+                GUI_00.g4_money_user.updateMoney(TexasHoldem.money.getUserMoney());
+            }
+
+            if (GUI_00.g4_money_com != null) {
+                GUI_00.g4_money_com.updateMoney(TexasHoldem.money.getComMoney());
+            }
+        }
     }
 
     public static void updateDisplays() {
-        if (GUI_00.g4_money == null) return;
-        for (int i = 0; i < 4; i++) GUI_00.g4_money.setStageMoney(i, stageCom[i], stageUser[i]);
-        if (GUI_00.g4_money_user != null && TexasHoldem.money != null)
-            GUI_00.g4_money_user.updateMoney(TexasHoldem.money.getUserMoney());
+        if (GUI_00.g4_money != null) {
+            for (int i = 0; i < 4; i++) {
+                GUI_00.g4_money.setStageMoney(
+                    i, stageCom[i], stageUser[i]
+                );
+            }
+        }
+
+        if (TexasHoldem.money != null) {
+            if (GUI_00.g4_money_user != null) {
+                GUI_00.g4_money_user.updateMoney(
+                    TexasHoldem.money.getUserMoney()
+                );
+            }
+
+            if (GUI_00.g4_money_com != null) {
+                GUI_00.g4_money_com.updateMoney(
+                    TexasHoldem.money.getComMoney()
+                );
+            }
+        }
     }
 
     public static void enableActions(boolean enabled) {

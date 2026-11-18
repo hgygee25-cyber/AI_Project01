@@ -4,18 +4,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Practice_Preflop_Percent {
-    private double userProbability;
-    private double comProbability;
-    private double drawProbability;
-
-    private long userWin;
-    private long comWin;
-    private long draw;
-    private long totalCases;
-    private Practice_Preflop_Percent() {
+    public double userProbability;
+    public double comProbability;
+    public double drawProbability;
+    public long userWin;
+    public long comWin;
+    public long draw;
+    public long totalCases;
+    public Practice_Preflop_Percent() {
     }
 
-    // 프리플랍 승률 계산 시작
+    // 프리플랍 승률 계산
     public static Practice_Preflop_Percent calculate(ArrayList<String> userCards, ArrayList<String> comCards) {
         Practice_Preflop_Percent result = new Practice_Preflop_Percent();
 
@@ -149,7 +148,7 @@ public class Practice_Preflop_Percent {
     }
 
     // 카드 문자열을 숫자로 변환
-    private static int convertCard(String card) {
+    public static int convertCard(String card) {
         String[] data = card.split(",");
 
         int suit = Integer.parseInt(data[0].trim());
@@ -158,7 +157,7 @@ public class Practice_Preflop_Percent {
     }
 
     // 카드 2장 변환
-    private static int[] convertCards(ArrayList<String> cards) {
+    public static int[] convertCards(ArrayList<String> cards) {
         int[] result = new int[cards.size()];
 
         for (int i = 0; i < cards.size(); i++) {
@@ -168,13 +167,13 @@ public class Practice_Preflop_Percent {
     }
 
     // 카드의 무늬 가져오기
-    private static int getSuit(int card) {
+    public static int getSuit(int card) {
         return card / 13;
     }
 
     // 카드의 숫자 가져오기
     // A = 14, 2~K = 2~13
-    private static int getRank(int card) {
+    public static int getRank(int card) {
         int rank = (card % 13) + 1;
 
         if (rank == 1) {
@@ -185,7 +184,7 @@ public class Practice_Preflop_Percent {
 
     // 7장 카드의 족보 점수 계산
     // HandEvaluator를 사용하지 않음
-    private static long evaluate(int[] cards) {
+    public static long evaluate(int[] cards) {
         int[] rankCount = new int[15];
         int[] suitCount = new int[4];
 
@@ -371,7 +370,7 @@ public class Practice_Preflop_Percent {
     }
 
     // 스트레이트의 가장 높은 숫자 찾기
-    private static int getStraightHigh(boolean[] ranks) {
+    public static int getStraightHigh(boolean[] ranks) {
         // A, 2, 3, 4, 5 처리
         if (ranks[14] && ranks[2] && ranks[3] && ranks[4] && ranks[5]) {
             // 5-high straight
@@ -399,7 +398,7 @@ public class Practice_Preflop_Percent {
     }
 
     // 족보 등급과 숫자를 하나의 점수로 변환
-    private static long makeScore(int category, int... values) {
+    public static long makeScore(int category, int... values) {
         long score = category;
         for (int i = 0; i < 5; i++) {
             int value = 0;
@@ -428,13 +427,6 @@ public class Practice_Preflop_Percent {
 
     // 전체 계산 결과
     public String getResult() {
-
-        return "사용자 승리 횟수: " + userWin
-                + "\n컴퓨터 승리 횟수: " + comWin
-                + "\n무승부 횟수: " + draw
-                + "\n전체 계산 횟수: " + totalCases
-                + "\n사용자 승률: " + userProbability + "%"
-                + "\n컴퓨터 승률: " + comProbability + "%"
-                + "\n무승부 확률: " + drawProbability + "%";
+        return "사용자 승리 횟수: " + userWin + "\n컴퓨터 승리 횟수: " + comWin + "\n무승부 횟수: " + draw + "\n전체 계산 횟수: " + totalCases + "\n사용자 승률: " + userProbability + "%" + "\n컴퓨터 승률: " + comProbability + "%" + "\n무승부 확률: " + drawProbability + "%";
     }
 }

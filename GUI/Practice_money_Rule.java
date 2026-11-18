@@ -11,7 +11,6 @@ public class Practice_money_Rule {
         }
 
         stage = Practice.count;
-        
         if (stage < 1 || stage > 3) {
             return;
         }
@@ -79,7 +78,6 @@ public class Practice_money_Rule {
                 Practice_card_back.flipToBack(Practice.card_com2, first2, second2);
             }
             Practice.percent();
-
             return;
         }
         if(who=="fold"){

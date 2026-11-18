@@ -1,15 +1,11 @@
-
 package GUI;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class TexasHoldem_money_User extends JPanel {
-
-    private final JLabel moneyLabel;
-
+    public final JLabel moneyLabel;
     public TexasHoldem_money_User() {
-
         setBounds(190, 350, 245, 35);
         setLayout(null);
         setOpaque(false);
@@ -24,28 +20,17 @@ public class TexasHoldem_money_User extends JPanel {
 
     // 사용자 보유 칩 변경
     public void updateMoney(int money) {
-
         moneyLabel.setText("USER CHIPS    " + money);
     }
 
     @Override
     protected void paintComponent(Graphics g) {
-
         super.paintComponent(g);
-
         Graphics2D g2 = (Graphics2D) g.create();
 
-        g2.setRenderingHint(
-                RenderingHints.KEY_ANTIALIASING,
-                RenderingHints.VALUE_ANTIALIAS_ON
-        );
-
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setColor(new Color(0, 0, 0, 180));
-
-        g2.fillRoundRect(
-                0, 0, getWidth(), getHeight(), 12, 12
-        );
-
+        g2.fillRoundRect(0, 0, getWidth(), getHeight(), 12, 12);
         g2.dispose();
     }
 }
