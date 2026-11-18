@@ -31,6 +31,7 @@ public class GUI_00 extends JFrame {
     public static TexasHoldem_money_User g4_money_user;
     public static first_frame_store g;
     public static first_frame_store2 gg;
+    public static first_frame_chip gg1;
     public static first_frame_record gg2;
     public static first_frame_hand gg3;
     public static first_frame_period gg4;
@@ -65,7 +66,8 @@ public class GUI_00 extends JFrame {
         g4_donon = new TexasHoldem_donon();
         g4_money = new TexasHoldem_money();
         g4_money_user = new TexasHoldem_money_User();
-        
+        gg1 = new first_frame_chip();
+        contentpane.add(gg1);
         contentpane.add(gg);
         contentpane.add(g);
         contentpane.add(g4_donon);
@@ -90,6 +92,7 @@ public class GUI_00 extends JFrame {
         contentpane.add(g1_1);
         contentpane.add(g0);
 
+        gg1.setVisible(false);
         gg.setVisible(false);
         g.setVisible(false);
         g1_2_7.setVisible(false);

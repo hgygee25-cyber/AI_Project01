@@ -234,6 +234,11 @@ public class first_frame_store2 extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 System.out.println("CHIP SHOP 클릭");
+                GUI_00.gg.setVisible(false);
+                GUI_00.gg1.setVisible(true);
+                GUI_00.contentpane.setComponentZOrder(GUI_00.gg1, 0);
+                GUI_00.contentpane.revalidate();
+                GUI_00.contentpane.repaint();
             }
         });
 
