@@ -11,25 +11,27 @@ import java.util.*;
 import java.awt.event.*;
 
 public class first_frame_record extends JPanel {
-    private static final String RECORD_FILE = "data/texas_records.txt";
-    private String username;
-    private int totalGames = 0;
-    private int wins = 0;
-    private int losses = 0;
-    private int draws = 0;
-    private long totalChipChange = 0;
-    private long totalPot = 0;
-    private double winRate = 0.0;
-    private ArrayList<GameData> gameList = new ArrayList<>();
-    private JLabel totalLabel;
-    private JLabel winLabel;
-    private JLabel loseLabel;
-    private JLabel drawLabel;
-    private JLabel rateLabel;
-    private JLabel chipLabel;
-    private JLabel potLabel;
-    private JLabel recentMessage;
-    private static class GameData {
+    public static final String RECORD_FILE = "data/texas_records.txt";
+    public String username;
+    public int totalGames = 0;
+    public int wins = 0;
+    public int losses = 0;
+    public int draws = 0;
+    public long totalChipChange = 0;
+    public long totalPot = 0;
+    public double winRate = 0.0;
+    public ArrayList<GameData> gameList = new ArrayList<>();
+    public JLabel totalLabel;
+    public JLabel winLabel;
+    public JLabel loseLabel;
+    public JLabel drawLabel;
+    public JLabel rateLabel;
+    public JLabel chipLabel;
+    public JLabel potLabel;
+    public JLabel recentMessage;
+    public JProgressBar winRateBar; 
+    //
+    public static class GameData {
         String time;
         String result;
         String hand;
@@ -75,7 +77,7 @@ public class first_frame_record extends JPanel {
         });
     }
 
-    private JLabel makeLabel(String text, int x, int y, int width, int height, int fontSize, Color color) {
+    public JLabel makeLabel(String text, int x, int y, int width, int height, int fontSize, Color color) {
         JLabel label = new JLabel(text);
         label.setFont(new Font("맑은 고딕", Font.BOLD, fontSize));
         label.setForeground(color);
@@ -84,7 +86,7 @@ public class first_frame_record extends JPanel {
         return label;
     }
 
-    private void loadRecords() {
+    public void loadRecords() {
         gameList.clear();
         Path path = Paths.get(RECORD_FILE);
 
@@ -126,7 +128,7 @@ public class first_frame_record extends JPanel {
             e.printStackTrace();
         }
     }
-    private void calculateStatistics() {
+    public void calculateStatistics() {
         totalGames = gameList.size();
         wins = 0;
         losses = 0;
@@ -154,11 +156,31 @@ public class first_frame_record extends JPanel {
             winRate = 0.0;
         }
     }
-    private String formatNumber(long number) {
+    public String formatNumber(long number) {
         return String.format("%,d", number);
     }
+    public void refreshRecords() {
+        loadRecords();
+        calculateStatistics();
 
-    private void createUI() {
+        totalLabel.setText(formatNumber(totalGames) + " 회");
+        winLabel.setText(formatNumber(wins) + " 회");
+        loseLabel.setText(formatNumber(losses) + " 회");
+        drawLabel.setText(formatNumber(draws) + " 회");
+        rateLabel.setText(new DecimalFormat("0.00").format(winRate) + "%");
+
+        String chipText = (totalChipChange > 0 ? "+" : "") + formatNumber(totalChipChange);
+        chipLabel.setText(chipText);
+        chipLabel.setForeground(totalChipChange >= 0 ? new Color(235, 195, 110) : new Color(210, 130, 110));
+        long averagePot = totalGames > 0 ? totalPot / totalGames : 0;
+        potLabel.setText(formatNumber(averagePot));
+        
+        winRateBar.setValue((int) Math.round(winRate));
+
+        revalidate();
+        repaint();
+    }    
+    public void createUI() {
         JLabel label2 = new JLabel("GAME RECORD");
 		label2.setFont(new Font("맑은 고딕", Font.BOLD, 30));
         label2.setForeground(new Color(235, 190, 90));
@@ -194,6 +216,34 @@ public class first_frame_record extends JPanel {
         long averagePot = totalGames > 0 ? totalPot / totalGames : 0;
         potLabel = makeLabel(formatNumber(averagePot), 580, 385, 250, 20, 20, Color.WHITE);
         
+        winRateBar = new JProgressBar(0, 100) {
+            @Override
+            protected void paintComponent(Graphics g) {
+                Graphics2D g2 = (Graphics2D) g;
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+                int w = getWidth();
+                int h = getHeight();
+
+                g2.setColor(new Color(45, 40, 35));
+                g2.fillRoundRect(0, 0, w, h, h, h);
+
+                int fillWidth = (int) (w * (getValue() / 100.0));
+                if (fillWidth > 0) {
+                    g2.setColor(new Color(235, 195, 110));
+                    g2.fillRoundRect(0, 0, Math.max(fillWidth, h), h, h, h);
+                }
+
+                /*g2.setColor(new Color(184, 145, 91));
+                g2.drawRoundRect(0, 0, w - 1, h - 1, h, h);*/
+            }
+        };
+        winRateBar.setValue((int) Math.round(winRate));
+        winRateBar.setBounds(260, 312, 680, 16);
+        winRateBar.setOpaque(false);
+        winRateBar.setBorderPainted(false);
+        add(winRateBar);
+
         ImageIcon background3 = new ImageIcon("image/user1.png");
         Image image3 = background3.getImage();
         Image scaledimage3 = image3.getScaledInstance(430, 70, Image.SCALE_SMOOTH);

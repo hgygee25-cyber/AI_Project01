@@ -251,6 +251,8 @@ public class first_frame_store2 extends JPanel {
                 GUI_00.contentpane.setComponentZOrder(GUI_00.gg2, 0);
                 GUI_00.contentpane.revalidate();
                 GUI_00.contentpane.repaint();
+                GUI_00.gg2.refreshRecords();
+                GUI_00.gg2.setVisible(true);
             }
         });
 
@@ -262,6 +264,8 @@ public class first_frame_store2 extends JPanel {
                 GUI_00.contentpane.setComponentZOrder(GUI_00.gg3, 0);
                 GUI_00.contentpane.revalidate();
                 GUI_00.contentpane.repaint();
+                GUI_00.gg3.refreshRecords();
+                GUI_00.gg3.setVisible(true);
             }
         });
 
@@ -273,6 +277,8 @@ public class first_frame_store2 extends JPanel {
                 GUI_00.contentpane.setComponentZOrder(GUI_00.gg4, 0);
                 GUI_00.contentpane.revalidate();
                 GUI_00.contentpane.repaint();
+                GUI_00.gg4.refreshRecords();
+                GUI_00.gg4.setVisible(true);
             }
         });
     }

@@ -71,6 +71,8 @@ public class first_frame_hand extends JPanel {
         }
     }
     public void loadRecords() {
+        handStats.clear();
+        initializeStats();
         Path path = Paths.get(RECORD_FILE);
 
         if (!Files.exists(path)) {
@@ -116,11 +118,9 @@ public class first_frame_hand extends JPanel {
 
                 if (result.equals("PLAYER_WIN")) {
                     stats.wins++;
-                }
-                else if (result.equals("COMPUTER_WIN")) {
+                }else if (result.equals("COMPUTER_WIN")) {
                     stats.losses++;
-                }
-                else if (result.equals("DRAW")) {
+                }else if (result.equals("DRAW")) {
                     stats.draws++;
                 }
             }
@@ -128,7 +128,13 @@ public class first_frame_hand extends JPanel {
             e.printStackTrace();
         }
     }
-
+    public void refreshRecords() {
+        loadRecords();
+        removeAll();
+        createUI();
+        revalidate();
+        repaint();
+    }
     public void createUI() {
         JPanel background = new JPanel();
         setBounds(0, 0, 1072, 598);
@@ -143,24 +149,16 @@ public class first_frame_hand extends JPanel {
         line.setBackground(new Color(130, 105, 70));
         add(line);
 
+        JLabel label = new JLabel("*HAND ANALYSIS는 FOLD한 게임을 제외하기에 실제 게임 횟수와는 다를 수 있습니다.");
+        label.setBounds(55, 100, 500, 14);
+        label.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+        label.setBackground(Color.BLACK);
+        add(label);
+
         int headerY = 140;
-        String[] headers = {
-            "HAND",
-            "PLAYED",
-            "WINS",
-            "LOSSES",
-            "DRAWS",
-            "WIN RATE",
-            "AVERAGE POT"
-        };
-
-        int[] xPositions = {
-            65, 390, 490, 585, 680, 775, 900
-        };
-
-        int[] widths = {
-            300, 90, 90, 90, 90, 110, 120
-        };
+        String[] headers = {"HAND", "PLAYED", "WINS", "LOSSES", "DRAWS", "WIN RATE", "AVERAGE POT"};
+        int[] xPositions = {65, 390, 490, 585, 680, 775, 900};
+        int[] widths = {300, 90, 90, 90, 90, 110, 120};
 
         for (int i = 0; i < headers.length; i++) {
             JLabel header = makeLabel( headers[i], xPositions[i], headerY, widths[i], 30, 13, new Color(235, 200, 140), Font.BOLD);

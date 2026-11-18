@@ -108,6 +108,7 @@ public class first_frame extends JPanel{
 			@Override
 			public void mouseClicked(MouseEvent e) {
                 //텍사스 홀덤 연습창으로 이동
+                GUI_00.g.setVisible(false);
                 GUI_00.g1.setVisible(true);
                 GUI_00.g0.setVisible(false);
             }
@@ -137,7 +138,7 @@ public class first_frame extends JPanel{
                 if(first_frame_store.label00.getText() != ""){     
                     GUI_00.g0.setVisible(false);
                     GUI_00.g2.setVisible(true);
-                    
+                    GUI_00.g.setVisible(false);
                 }else{
                     int result = JOptionPane.showConfirmDialog(first_frame.this, "로그인은 필수입니다.\n로그인 화면으로 넘어갑니다.", "로그인 안내", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
                     if (result == JOptionPane.OK_OPTION) {
@@ -154,6 +155,7 @@ public class first_frame extends JPanel{
                 if(first_frame_store.label00.getText() != ""){
                     GUI_00.g3.setVisible(true);
                     GUI_00.g0.setVisible(false);
+                    GUI_00.g.setVisible(false);
                 }else{
                     int result = JOptionPane.showConfirmDialog(first_frame.this, "로그인은 필수입니다.\n로그인 화면으로 넘어갑니다.", "로그인 안내", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
                     if (result == JOptionPane.OK_OPTION) {
@@ -170,6 +172,7 @@ public class first_frame extends JPanel{
                 if(first_frame_store.label00.getText() != ""){    
                     GUI_00.g4.setVisible(true);
                     GUI_00.g0.setVisible(false);
+                    GUI_00.g.setVisible(false);
                 }else{
                     int result = JOptionPane.showConfirmDialog(first_frame.this, "로그인은 필수입니다.\n로그인 화면으로 넘어갑니다.", "로그인 안내", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
                     if (result == JOptionPane.OK_OPTION) {

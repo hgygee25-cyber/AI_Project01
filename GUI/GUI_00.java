@@ -1,9 +1,7 @@
 package GUI;
 import java.awt.*;
 import javax.swing.*;
-
 import login.GUI_01;
-
 import java.awt.event.*;
 
 public class GUI_00 extends JFrame {
