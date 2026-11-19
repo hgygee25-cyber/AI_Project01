@@ -10,43 +10,7 @@ public class first_frame extends JPanel{
         setBounds(0, 0, 1072,598);
 		setLayout(null);
 
-        JLabel label11 = new JLabel("EXIT");
-        label11.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		label11.setForeground(Color.white);
-        label11.setBounds(930, 70, 150,50);
-        add(label11);
-
-        JLabel label12 = new JLabel("LOGIN");
-        label12.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		label12.setForeground(Color.white);
-        label12.setBounds(925, 150, 150,50);
-        add(label12);
-
-        JLabel label13 = new JLabel("PRACTICE(Texas Hold 'em)");
-        label13.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		label13.setForeground(Color.white);
-        label13.setBounds(845, 230, 200,50);
-        add(label13);
-        
-        JLabel label20 = new JLabel("인디언 포커");
-        label20.setFont(new Font("맑은 고딕", Font.BOLD, 20));
-		label20.setForeground(Color.white);
-        label20.setBounds(100, 260, 200,50);
-        add(label20);
-
-        JLabel label21 = new JLabel("원카드");
-        label21.setFont(new Font("맑은 고딕", Font.BOLD, 20));
-		label21.setForeground(Color.white);
-        label21.setBounds(390, 260, 200,50);
-        add(label21);
-
-        JLabel label22 = new JLabel("Texas Hold 'em");
-        label22.setFont(new Font("맑은 고딕", Font.BOLD, 20));
-		label22.setForeground(Color.white);
-        label22.setBounds(623, 260, 200,50);
-        add(label22);
-
-        ImageIcon icon11 = new ImageIcon("image/버튼.png");
+        ImageIcon icon11 = new ImageIcon("image/b1.png");
         Image image11 = icon11.getImage();
         Image scaledimage11 = image11.getScaledInstance(150,50,Image.SCALE_SMOOTH);
         ImageIcon scaledicon11 = new ImageIcon(scaledimage11);
@@ -54,7 +18,7 @@ public class first_frame extends JPanel{
 		label_image11.setBounds(870, 70, 150,50);
         add(label_image11);
 
-        ImageIcon icon12 = new ImageIcon("image/버튼.png");
+        ImageIcon icon12 = new ImageIcon("image/b2.png");
         Image image12 = icon12.getImage();
         Image scaledimage12 = image12.getScaledInstance(150,50,Image.SCALE_SMOOTH);
         ImageIcon scaledicon12 = new ImageIcon(scaledimage12);
@@ -62,7 +26,7 @@ public class first_frame extends JPanel{
 		label_image12.setBounds(870, 150, 150,50);
         add(label_image12);
 
-        ImageIcon icon13 = new ImageIcon("image/버튼.png");
+        ImageIcon icon13 = new ImageIcon("image/b3.png");
         Image image13 = icon13.getImage();
         Image scaledimage13 = image13.getScaledInstance(230,50,Image.SCALE_SMOOTH);
         ImageIcon scaledicon13 = new ImageIcon(scaledimage13);
@@ -70,7 +34,7 @@ public class first_frame extends JPanel{
 		label_image13.setBounds(820, 230, 230, 50);
         add(label_image13);
         
-        ImageIcon icon14 = new ImageIcon("image/버튼배경.png");
+        ImageIcon icon14 = new ImageIcon("image/g1.png");
         Image image14 = icon14.getImage();
         Image scaledimage14 = image14.getScaledInstance(200,300,Image.SCALE_SMOOTH);
         ImageIcon scaledicon14 = new ImageIcon(scaledimage14);
@@ -78,7 +42,7 @@ public class first_frame extends JPanel{
 		label_image14.setBounds(50, 150, 200,300);
         add(label_image14);
 
-        ImageIcon icon15 = new ImageIcon("image/버튼배경.png");
+        ImageIcon icon15 = new ImageIcon("image/g2.png");
         Image image15 = icon15.getImage();
         Image scaledimage15 = image15.getScaledInstance(200,300,Image.SCALE_SMOOTH);
         ImageIcon scaledicon15 = new ImageIcon(scaledimage15);
@@ -86,7 +50,7 @@ public class first_frame extends JPanel{
 		label_image15.setBounds(320, 150, 200,300);
         add(label_image15);
 
-        ImageIcon icon16 = new ImageIcon("image/버튼배경.png");
+        ImageIcon icon16 = new ImageIcon("image/g3.png");
         Image image16 = icon16.getImage();
         Image scaledimage16 = image16.getScaledInstance(200,300,Image.SCALE_SMOOTH);
         ImageIcon scaledicon16 = new ImageIcon(scaledimage16);

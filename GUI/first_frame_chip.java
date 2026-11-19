@@ -2,6 +2,7 @@
 package GUI;
 
 import javax.swing.*;
+import java.awt.event.*;
 import java.awt.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,12 +13,11 @@ public class first_frame_chip extends JPanel {
     public JButton chargeButton;
     public JButton historyButton;
     public JButton cancelButton;
-
+    public JLabel label06;
     public first_frame_chip() {
         setBackground(Color.black);
-        setBounds(10, 10, 280, 160);
+        setBounds(0, 0, 1072,598);
         setLayout(null);
-        setOpaque(false);
         
         label00 = new JLabel("가상 칩 충전");
         label00.setFont(new Font("맑은 고딕", Font.BOLD, 15));
@@ -44,6 +44,22 @@ public class first_frame_chip extends JPanel {
         add(cancelButton);
 
         cancelButton.addActionListener(e -> cancelPayment());
+
+        label06 = new JLabel("BACK");
+        label06.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+        label06.setForeground(new Color(235, 200, 140));
+        label06.setBounds(20, 550, 200,50);
+        label06.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        add(label06);
+        
+        label06.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) { 
+                GUI_00.gg.setVisible(true);
+                GUI_00.gg1.setVisible(false);
+                GUI_00.g.setVisible(false);
+            }
+        });
     }
 
     public void chargeChip() {

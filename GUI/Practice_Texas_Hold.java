@@ -11,19 +11,7 @@ public class Practice_Texas_Hold  extends JPanel{
         setBounds(0, 0, 1072,598);
 		setLayout(null);
 
-		JLabel label01 = new JLabel("Rule");
-        label01.setFont(new Font("맑은 고딕", Font.BOLD, 20));
-		label01.setForeground(Color.white);
-        label01.setBounds(320, 260, 200,50);
-        add(label01);
-
-        JLabel label02 = new JLabel("Practice Texas Hold'em");
-        label02.setFont(new Font("맑은 고딕", Font.BOLD, 20));
-		label02.setForeground(Color.white);
-        label02.setBounds(650, 260, 300,50);
-        add(label02);
-
-		ImageIcon icon10 = new ImageIcon("image/버튼배경.png");
+		ImageIcon icon10 = new ImageIcon("image/bg1.png");
         Image image10 = icon10.getImage();
         Image scaledimage10 = image10.getScaledInstance(300,300,Image.SCALE_SMOOTH);
         ImageIcon scaledicon10 = new ImageIcon(scaledimage10);
@@ -31,7 +19,7 @@ public class Practice_Texas_Hold  extends JPanel{
 		label_image10.setBounds(200, 150, 300,300);
         add(label_image10);
 
-        ImageIcon icon11 = new ImageIcon("image/버튼배경.png");
+        ImageIcon icon11 = new ImageIcon("image/bg2.png");
         Image image11 = icon11.getImage();
         Image scaledimage11 = image11.getScaledInstance(300,300,Image.SCALE_SMOOTH);
         ImageIcon scaledicon11 = new ImageIcon(scaledimage11);
