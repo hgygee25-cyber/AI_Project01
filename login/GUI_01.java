@@ -138,7 +138,6 @@ public class GUI_01 extends JFrame{
 					GUI_00.gg2 = new first_frame_record(result);
 					GUI_00.contentpane.add(GUI_00.gg2);
 					GUI_00.gg2.setVisible(false);
-					String profilePath = first_frame_settings_1.loadImage(result);
 					
 					GUI_00.gg3 = new first_frame_hand(result);
 					GUI_00.contentpane.add(GUI_00.gg3);
@@ -147,15 +146,12 @@ public class GUI_01 extends JFrame{
 					GUI_00.gg4 = new first_frame_period(result);
 					GUI_00.contentpane.add(GUI_00.gg4);
 					GUI_00.gg4.setVisible(false);
-				
-					GUI_00.gg5 = new first_frame_settings(result);
-					GUI_00.contentpane.add(GUI_00.gg5);
-					GUI_00.gg5.setVisible(false);
-				
+					
+					GUI_00.prepareProfileSettings(result);				
+					String profilePath = first_frame_settings_1.loadImage(result);
 					ImageIcon profileIcon = new ImageIcon(profilePath);
 					Image scaled = profileIcon.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
 					first_frame_store2.label44.setIcon(new ImageIcon(scaled));
-
 					
 					if (loginSuccess != null) {
               			loginSuccess.run();

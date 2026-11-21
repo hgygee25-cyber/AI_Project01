@@ -8,7 +8,7 @@ import java.awt.event.*;
 import java.io.File;
 
 public class first_frame_settings extends JPanel {
-    public static String username;
+    private final String username;
     public JLabel previewLabel;
     public String selectedImage;
     public JButton[] imageButtons;
@@ -177,6 +177,20 @@ public class first_frame_settings extends JPanel {
             GUI_00.contentpane.revalidate();
             GUI_00.contentpane.repaint();
         });
+
+
+        JButton button5 = makeButton("OTHER OPTION");
+        button5.setBounds(820, 100, 230, 40);
+        add(button5);
+
+        button5.addActionListener(e -> {
+            GUI_00.gg5.setVisible(false);
+            GUI_00.gg6.setVisible(true);
+            GUI_00.contentpane.setComponentZOrder(GUI_00.gg6, 0);
+            GUI_00.contentpane.revalidate();
+            GUI_00.contentpane.repaint();
+        });
+
         updateSelection();
     }
 

@@ -3,7 +3,7 @@ import java.awt.*;
 import javax.swing.*;
 import login.GUI_01;
 import java.awt.event.*;
-
+//이 소스코드가 메인 코드입니다!!!!
 public class GUI_00 extends JFrame {
     public static Container contentpane;
     public static first_frame g0;
@@ -36,6 +36,76 @@ public class GUI_00 extends JFrame {
     public static first_frame_hand gg3;
     public static first_frame_period gg4;
     public static first_frame_settings gg5;
+    public static first_frame_setting_musicsettings gg6;
+    public static String currentUsername;
+    //
+    
+public static void prepareProfileSettings(String username) {
+
+    if (contentpane == null || username == null || username.trim().isEmpty()) {
+        return;
+    }
+
+    if (gg5 != null) {
+        contentpane.remove(gg5);
+    }
+
+    if (gg6 != null) {
+        contentpane.remove(gg6);
+    }
+
+    currentUsername = username;
+
+    gg5 = new first_frame_settings(username);
+    gg6 = new first_frame_setting_musicsettings(username);
+
+    contentpane.add(gg5);
+    contentpane.add(gg6);
+
+    gg5.setVisible(false);
+    gg6.setVisible(false);
+
+    // 사용자 음악 설정 불러오기
+    String[] musicSetting = first_frame_setting_musicdata.load(username);
+
+    int musicNumber = 1;
+    int musicVolume = 70;
+    boolean musicEnabled = true;
+
+    try {
+        musicNumber = Integer.parseInt(musicSetting[0]);
+        musicVolume = Integer.parseInt(musicSetting[1]);
+        musicEnabled = Boolean.parseBoolean(musicSetting[2]);
+    } catch (Exception e) {
+        musicNumber = 1;
+        musicVolume = 70;
+        musicEnabled = true;
+    }
+
+    if (musicNumber < 1 || musicNumber > 3) {
+        musicNumber = 1;
+    }
+
+    if (musicVolume < 0 || musicVolume > 100) {
+        musicVolume = 70;
+    }
+
+    // 음악 재생
+    first_frame_setting_music.setVolume(musicVolume);
+
+    if (musicEnabled) {
+        first_frame_setting_music.play("music/music" + musicNumber + ".wav");
+    } else {
+        first_frame_setting_music.stop();
+    }
+
+    contentpane.setComponentZOrder(gg5, 0);
+    contentpane.setComponentZOrder(gg6, 0);
+
+    contentpane.revalidate();
+    contentpane.repaint();
+}
+
     //
     public GUI_00() {
         setUndecorated(true);
@@ -43,7 +113,7 @@ public class GUI_00 extends JFrame {
 		setSize(1072,598);
 		contentpane = getContentPane();
 		contentpane.setLayout(null);
-        
+
         gg = new first_frame_store2();
         g = new first_frame_store();
         g1_1_5 = new Rule_5();
