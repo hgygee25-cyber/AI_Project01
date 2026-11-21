@@ -30,10 +30,12 @@ public class GUI_00 extends JFrame {
     public static TexasHoldem_money_Com g4_money_com;
     public static first_frame_store g;
     public static first_frame_store2 gg;
+    public static first_frame_store3 ggg;
     public static first_frame_chip gg1;
     public static first_frame_record gg2;
     public static first_frame_hand gg3;
     public static first_frame_period gg4;
+    public static first_frame_settings gg5;
     //
     public GUI_00() {
         setUndecorated(true);
@@ -67,6 +69,9 @@ public class GUI_00 extends JFrame {
         g4_money_user = new TexasHoldem_money_User();
         g4_money_com = new TexasHoldem_money_Com(); 
         gg1 = new first_frame_chip();
+        ggg = new first_frame_store3();
+
+        contentpane.add(ggg);
         contentpane.add(gg1);
         contentpane.add(gg);
         contentpane.add(g);
@@ -94,6 +99,7 @@ public class GUI_00 extends JFrame {
         contentpane.add(g0);
 
         gg1.setVisible(false);
+        ggg.setVisible(false);
         gg.setVisible(false);
         g.setVisible(false);
         g1_2_7.setVisible(false);

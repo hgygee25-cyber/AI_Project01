@@ -13,6 +13,7 @@ public class first_frame_store2 extends JPanel {
     public static JLabel label1;
     public static JLabel label2;
     public static JLabel label3;
+    public static JLabel label44;
     JLabel label4;
     JLabel label5;
     JLabel label6;
@@ -44,13 +45,14 @@ public class first_frame_store2 extends JPanel {
                     users.add(data[0]);
                     chips.add(Integer.parseInt(data[1]));
                 }
+                System.out.println("2.. store2.. +"+data);
             }
 
             int userIndex = users.indexOf(name);
             if (userIndex == -1) {
                 return;
             }
-
+            
             int userChips = chips.get(userIndex);
             rank = 1;
 
@@ -160,11 +162,19 @@ public class first_frame_store2 extends JPanel {
         label000.setBounds(330, 120, 55, 55);
         add(label000);
 
+        ImageIcon background2 = new ImageIcon("image/설정.png");
+        Image image2 = background2.getImage();
+        Image scaledimage2 = image2.getScaledInstance(55, 55, Image.SCALE_SMOOTH);
+        ImageIcon scaledicon2 = new ImageIcon(scaledimage2);
+        JLabel label001 = new JLabel(scaledicon2);
+        label001.setBounds(620, 120, 55, 55);
+        add(label001);
+
         ImageIcon background11 = new ImageIcon("image/user3.png");
         Image image11 = background11.getImage();
         Image scaledimage11 = image11.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
         ImageIcon scaledicon11 = new ImageIcon(scaledimage11);
-        JLabel label44 = new JLabel(scaledicon11);
+        label44 = new JLabel(scaledicon11);
         label44.setBounds(38, 105, 80, 80);
         add(label44);
 
@@ -199,7 +209,7 @@ public class first_frame_store2 extends JPanel {
         label7 = new JLabel(scaledicon55);
         label7.setBounds(540, 380, 420, 150);
         add(label7);
-
+                    
         JLabel line1 = new JLabel();
         line1.setBounds(25, 100, 1022, 1);
         line1.setOpaque(true);
@@ -212,6 +222,58 @@ public class first_frame_store2 extends JPanel {
         line2.setBackground(new Color(184, 145, 91));
         add(line2);
 
+        JLabel line3 = new JLabel();
+        line3.setBounds(615, 115, 1, 60);
+        line3.setOpaque(true);
+        line3.setBackground(new Color(184, 145, 91));
+        add(line3);
+        //
+        JButton panel1 = new JButton("");
+        panel1.setFont(new Font("Serif", Font.BOLD, 10));
+        panel1.setForeground(Color.WHITE);
+        panel1.setOpaque(false);
+        panel1.setContentAreaFilled(false);
+        panel1.setBorderPainted(false);
+        panel1.setFocusPainted(false);
+        panel1.setBounds(335, 120, 200, 60);
+        panel1.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        add(panel1);
+
+        label001.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println("설정");
+                GUI_00.gg5.setVisible(true);
+                GUI_00.gg.setVisible(false);
+            }
+        });
+
+        panel1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                panel1.setText("---> RANKING OF ALL <---");
+                panel1.setOpaque(true);
+                panel1.setContentAreaFilled(true);
+                panel1.setBackground(new Color(40, 40, 40, 180));
+                panel1.repaint();    
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                panel1.setText("");
+                panel1.setOpaque(false);
+                panel1.setContentAreaFilled(false);
+                panel1.repaint();
+            }
+        });
+
+        panel1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e2) {
+                GUI_00.ggg.setVisible(true);
+                GUI_00.gg.setVisible(false);
+            }
+        });
         //
         JLabel label06 = new JLabel("BACK");
         label06.setFont(new Font("맑은 고딕", Font.BOLD, 20));

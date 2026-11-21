@@ -65,7 +65,7 @@ public class Practice_End extends JPanel {
                 GUI_00.g1_2_6.setVisible(false);
                 GUI_00.g1_2_3.setVisible(false);
                 GUI_00.g1_2_7.setVisible(false);
-
+                GUI_00.g.setVisible(true);
                 Practice.returnToStart();
             }
         });

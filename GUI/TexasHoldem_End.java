@@ -112,6 +112,7 @@ public class TexasHoldem_End extends JPanel {
             GUI_00.g4.setVisible(false);
             TexasHoldem.returnToStart();
             GUI_00.g0.setVisible(true);
+            GUI_00.g.setVisible(true);
             first_frame_store.username(TextDatabase.getUserName());
         });
 

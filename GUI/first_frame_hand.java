@@ -149,10 +149,10 @@ public class first_frame_hand extends JPanel {
         line.setBackground(new Color(130, 105, 70));
         add(line);
 
-        JLabel label = new JLabel("*HAND ANALYSIS는 FOLD한 게임을 제외하기에 실제 게임 횟수와는 다를 수 있습니다.");
-        label.setBounds(55, 100, 500, 14);
-        label.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
-        label.setBackground(Color.BLACK);
+        JLabel label = new JLabel("** HAND ANALYSIS는 FOLD한 게임을 제외하기에 실제 게임 횟수와는 다를 수 있습니다.");
+        label.setBounds(55, 95, 800, 14);
+        label.setFont(new Font("Serif", Font.PLAIN, 10));
+        label.setForeground(Color.white);
         add(label);
 
         int headerY = 140;
