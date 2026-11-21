@@ -3,7 +3,7 @@ import java.awt.*;
 import javax.swing.*;
 import login.GUI_01;
 import java.awt.event.*;
-
+//이 소스코드가 메인 코드입니다!!!!
 public class GUI_00 extends JFrame {
     public static Container contentpane;
     public static first_frame g0;
