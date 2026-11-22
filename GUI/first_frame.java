@@ -96,15 +96,29 @@ public class first_frame extends JPanel{
         });
 
         label_image14.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-                //인디언 포커 창으로 넘어가기
-                if(first_frame_store.label00.getText() != ""){     
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+                // 인디언 포커 창으로 넘어가기
+                if (first_frame_store.label00.getText() != "") {
+
                     GUI_00.g0.setVisible(false);
                     GUI_00.g2.setVisible(true);
                     GUI_00.g.setVisible(false);
-                }else{
-                    int result = JOptionPane.showConfirmDialog(first_frame.this, "로그인은 필수입니다.\n로그인 화면으로 넘어갑니다.", "로그인 안내", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
+
+                    // 실제 게임 시작
+                    GUI_00.g2.startGame();
+
+                } else {
+
+                    int result = JOptionPane.showConfirmDialog(
+                        first_frame.this,
+                        "로그인은 필수입니다.\n로그인 화면으로 넘어갑니다.",
+                        "로그인 안내",
+                        JOptionPane.DEFAULT_OPTION,
+                        JOptionPane.INFORMATION_MESSAGE
+                    );
+
                     if (result == JOptionPane.OK_OPTION) {
                         new login.GUI_01();
                     }
@@ -113,15 +127,27 @@ public class first_frame extends JPanel{
         });
 
         label_image15.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
+            @Override
+            public void mouseClicked(MouseEvent e) {
                 //원카드 창으로 넘어가기
                 if(first_frame_store.label00.getText() != ""){
+
+                    // 원카드 게임 초기화
+                    GUI_00.g3.startNewGame();
+
                     GUI_00.g3.setVisible(true);
                     GUI_00.g0.setVisible(false);
                     GUI_00.g.setVisible(false);
-                }else{
-                    int result = JOptionPane.showConfirmDialog(first_frame.this, "로그인은 필수입니다.\n로그인 화면으로 넘어갑니다.", "로그인 안내", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
+
+                } else {
+                    int result = JOptionPane.showConfirmDialog(
+                        first_frame.this,
+                        "로그인은 필수입니다.\n로그인 화면으로 넘어갑니다.",
+                        "로그인 안내",
+                        JOptionPane.DEFAULT_OPTION,
+                        JOptionPane.INFORMATION_MESSAGE
+                    );
+
                     if (result == JOptionPane.OK_OPTION) {
                         new login.GUI_01();
                     }

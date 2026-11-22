@@ -100,9 +100,60 @@ public class WinnerJudge {
         return result;
     }
 
-    public static Map<String, Object> compare(List<CardData> cards, List<CardData> cards2,
-            List<CardData> communityCards) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'compare'");
+    public static Map<String, Object> compare(
+        List<CardData> playerCards,
+        List<CardData> computerCards,
+        List<CardData> communityCards) {
+
+        if (playerCards == null ||
+            computerCards == null ||
+            communityCards == null ||
+            playerCards.size() != 2 ||
+            computerCards.size() != 2 ||
+            communityCards.size() != 5) {
+
+            throw new IllegalArgumentException("카드 구성이 올바르지 않습니다.");
+        }
+
+        // CardData를 기존 GUI 카드 문자열로 변환
+        ArrayList<String> player = convertCards(playerCards);
+        ArrayList<String> computer = convertCards(computerCards);
+        ArrayList<String> community = convertCards(communityCards);
+
+        // 기존 승패 판정 메서드 재사용
+        return compare(player, computer, community);
+    }
+
+    // CardData → "무늬번호,숫자번호" 변환
+    private static ArrayList<String> convertCards(List<CardData> cards) {
+
+        ArrayList<String> result = new ArrayList<>();
+
+        for (CardData card : cards) {
+
+            int suit;
+            switch (card.getSuit()) {
+                case "Spades": suit = 0; break;
+                case "Hearts": suit = 1; break;
+                case "Diamonds": suit = 2; break;
+                case "Clubs": suit = 3; break;
+                default:
+                    throw new IllegalArgumentException("잘못된 무늬입니다.");
+            }
+
+            int rank;
+            switch (card.getRank()) {
+                case "A": rank = 1; break;
+                case "J": rank = 11; break;
+                case "Q": rank = 12; break;
+                case "K": rank = 13; break;
+                default:
+                    rank = Integer.parseInt(card.getRank());
+            }
+
+            result.add(suit + "," + rank);
+        }
+
+        return result;
     }
 }

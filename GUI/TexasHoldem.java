@@ -42,6 +42,8 @@ public class TexasHoldem extends JPanel {
     static ArrayList<String> suit = new ArrayList<>();
     static  ArrayList<String> rank = new ArrayList<>();
     static ArrayList<String> choosed_card = new ArrayList<String>();
+    static ArrayList<String> firstPlayerCards = new ArrayList<String>();
+    static boolean userFirst = true;
     //
     static int count = 1;
     static ArrayList<String> com_choose;
@@ -53,7 +55,55 @@ public class TexasHoldem extends JPanel {
     static JButton startButton;
     static JPanel overlayPanel;
     static JLayeredPane layeredPane;
+    //
+    public static void startActualGame() {
+        // 선공권 결정 패널 숨기기
+        GUI_00.g4_firstPlayer.setVisible(false);
 
+        // 실제 게임 카드 배분
+        TexasHoldem_Basic_card.First_time_card_com();
+        TexasHoldem_Basic_card.First_time_card_user();
+
+        // 프리플랍 승률 계산
+        ArrayList<String> userCardList = new ArrayList<>();
+        ArrayList<String> comCardList = new ArrayList<>();
+
+        userCardList.add(choosed_card.get(2));
+        userCardList.add(choosed_card.get(3));
+
+        comCardList.add(choosed_card.get(1));
+        comCardList.add(choosed_card.get(0));
+
+        Practice_Preflop_Percent probability =
+            Practice_Preflop_Percent.calculate(userCardList, comCardList);
+
+        System.out.println(probability.getResult());
+
+        double userPercent = probability.getUserProbability();
+        double comPercent = probability.getComProbability();
+        double drawPercent = probability.getDrawProbability();
+
+        System.out.println("사용자 승률: " + userPercent);
+        System.out.println("컴퓨터 승률: " + comPercent);
+        System.out.println("무승부 확률: " + drawPercent);
+
+        win_com.setText("...");
+        win_user.setText("...");
+
+        probabilityGraph.setProbability(userPercent, comPercent, drawPercent);
+
+        // 기존 프리플랍 진행 여부 패널 표시
+        GUI_00.g4_donon.setVisible(true);
+        GUI_00.g4_money.setVisible(false);
+        GUI_00.g4_money_user.setVisible(true);
+        GUI_00.g4_money_com.setVisible(true);
+
+        setUserActionsEnabled(false);
+
+        GUI_00.contentpane.setComponentZOrder(GUI_00.g4_donon, 0);
+        GUI_00.contentpane.repaint();
+    }
+    //
     public static void returnToStart() {
         // 이전 게임 데이터 초기화
         choosed_card.clear();
@@ -525,44 +575,24 @@ public class TexasHoldem extends JPanel {
 
             probabilityGraph.setVisible(true);
             probabilityGraph.setProbability(0, 0, 0);
+            
+            // 선공권 카드 초기화
+            firstPlayerCards.clear();
+            userFirst = true;
 
-            // 6. 실제 게임 전용 카드 배분
-            TexasHoldem_Basic_card.First_time_card_com();
-            TexasHoldem_Basic_card.First_time_card_user();
+            // 선공권 결정 패널 초기화 및 표시
+            GUI_00.g4_firstPlayer.resetPanel();
+            GUI_00.g4_firstPlayer.setVisible(true);
 
-            // 7. 프리플랍 승률 계산
-            ArrayList<String> userCardList = new ArrayList<>();
-            ArrayList<String> comCardList = new ArrayList<>();
+            GUI_00.contentpane.setComponentZOrder(GUI_00.g4_firstPlayer, 0);
 
-            userCardList.add(choosed_card.get(2));
-            userCardList.add(choosed_card.get(3));
-
-            comCardList.add(choosed_card.get(1));
-            comCardList.add(choosed_card.get(0));
-
-            Practice_Preflop_Percent probability = Practice_Preflop_Percent.calculate(userCardList, comCardList);
-            System.out.println(probability.getResult());
-
-            double userPercent = probability.getUserProbability();
-            double comPercent = probability.getComProbability();
-            double drawPercent = probability.getDrawProbability();
-
-            System.out.println("사용자 승률: " + userPercent);
-            System.out.println("컴퓨터 승률: " + comPercent);
-            System.out.println("무승부 확률: " + drawPercent);
-
-            win_com.setText("...");
-            win_user.setText("...");
-
-            probabilityGraph.setProbability(userPercent, comPercent, drawPercent);
-
-            // 8. 프리플랍 게임 진행 여부 선택 패널 표시
-            GUI_00.g4_donon.setVisible(true);
             GUI_00.g4_money.setVisible(false);
             GUI_00.g4_money_user.setVisible(true);
             GUI_00.g4_money_com.setVisible(true);
+
             setUserActionsEnabled(false);
-            repaint();
+
+            GUI_00.contentpane.repaint();
         });
 
         layeredPane.add(overlayPanel, JLayeredPane.PALETTE_LAYER);

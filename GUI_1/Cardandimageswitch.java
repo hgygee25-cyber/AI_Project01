@@ -52,7 +52,7 @@ public class Cardandimageswitch {
     }
     
     public static ImageIcon BackCard() {
-        String path = "images/4.0.png";
+        String path = "image_card/4.0.png";
         return new ImageIcon(path);
     }
 }

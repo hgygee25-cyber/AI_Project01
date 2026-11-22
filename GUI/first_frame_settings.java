@@ -180,7 +180,7 @@ public class first_frame_settings extends JPanel {
 
 
         JButton button5 = makeButton("OTHER OPTION");
-        button5.setBounds(820, 100, 230, 40);
+        button5.setBounds(800, 60, 230, 40);
         add(button5);
 
         button5.addActionListener(e -> {

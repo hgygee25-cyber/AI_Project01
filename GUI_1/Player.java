@@ -125,4 +125,14 @@ public class Player {
     public int getBetAmount() {
         return betAmount;
     }
+
+    // 플레이어에게 칩 지급
+    public void addChips(int amount) {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("지급 금액은 양수여야 합니다.");
+        }
+
+        chips += amount;
+        allIn = false;
+    }
 }
