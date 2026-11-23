@@ -170,6 +170,12 @@ public class first_frame_store2 extends JPanel {
         label001.setBounds(620, 120, 55, 55);
         add(label001);
 
+        JLabel label0101 = new JLabel("Setting");
+        label0101.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+        label0101.setForeground(Color.WHITE);
+        label0101.setBounds(700, 120, 200, 20);
+        add(label0101);
+
         ImageIcon background11 = new ImageIcon("image/user3.png");
         Image image11 = background11.getImage();
         Image scaledimage11 = image11.getScaledInstance(80, 80, Image.SCALE_SMOOTH);

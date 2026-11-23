@@ -74,7 +74,7 @@ public class OneCard extends JPanel {
 
         computerLabel = new JLabel("카드 4장");
 
-        computerLabel.setBounds(320, 220, 120, 30);
+        computerLabel.setBounds(320, 240, 120, 30);
         computerLabel.setForeground(Color.WHITE);
         computerLabel.setFont(new Font("Serif", Font.BOLD, 20));
         computerLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -139,7 +139,7 @@ public class OneCard extends JPanel {
         if (deckIcon.getIconWidth() > 0) {
 
             Image deckImage = deckIcon.getImage().getScaledInstance(
-                100, 145, Image.SCALE_SMOOTH
+                80, 115, Image.SCALE_SMOOTH
             );
 
             deckImageLabel = new JLabel(new ImageIcon(deckImage));
@@ -151,7 +151,7 @@ public class OneCard extends JPanel {
         }
 
         // 위치 및 크기 지정320, 180, 120, 30
-        deckImageLabel.setBounds(640, 180, 80, 115);
+        deckImageLabel.setBounds(640, 200, 80, 115);
 
         add(deckImageLabel);
 
