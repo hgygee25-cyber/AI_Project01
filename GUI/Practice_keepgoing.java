@@ -37,16 +37,39 @@ public class Practice_keepgoing extends JPanel {
         button2.setOpaque(true);
         add(button2);
 
-        button1.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                button1.setEnabled(false);
-                button2.setEnabled(false);
-                Practice_money_Rule.endGame();
-                Practice_End.checkWinner();
-            }
-        });
+        button1.addActionListener(e -> {
+    button1.setEnabled(false);
+    button2.setEnabled(false);
 
+    // 커뮤니티 카드 5장 공개 여부 확인
+    if (Practice.choosed_card == null) {
+        System.out.println("카드 데이터가 없습니다.");
+        return;
+    }
+
+    int cardCount = Practice.choosed_card.size() - 4;
+
+    if (cardCount < 3) {
+        Practice_Basic_card.community_card();
+    }
+
+    if (Practice.choosed_card.size() < 8) {
+        Practice_Basic_up_card.community_card();
+    }
+
+    if (Practice.choosed_card.size() < 9) {
+        Practice_Basic_upup_card.community_card();
+    }
+
+    // 승패 판정
+    Practice_End.checkWinner();
+
+    // END 화면 전환
+    GUI_00.g1_2_7.setVisible(false);
+    GUI_00.g1_2_5.setVisible(false);
+    GUI_00.g1_2_6.setVisible(false);
+    GUI_00.g1_2_4.setVisible(true);
+});
         button2.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

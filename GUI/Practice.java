@@ -5,10 +5,11 @@ import GUI_1.HandEvaluator;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Map;
-//import java.util.Random;
+
 import GUI_1.HandProbability;
 
 public class Practice extends JPanel {   
+    static JComboBox<String> difficultyBox = new JComboBox<>(new String[]{"초급", "중급", "고급"});
     //족보
     static JLabel win_com;
     static JLabel win_user;
@@ -292,7 +293,20 @@ public class Practice extends JPanel {
         overlayPanel.setBounds(0, 0, 1072, 598);
         overlayPanel.setOpaque(false);
         overlayPanel.setLayout(null);
+        
+        // 난이도 선택창
+        JLabel difficultyLabel = new JLabel("AI DIFFICULTY");
+        difficultyLabel.setBounds(411, 185, 250, 30);
+        difficultyLabel.setFont(new Font("Serif", Font.BOLD, 18));
+        difficultyLabel.setForeground(Color.WHITE);
+        difficultyLabel.setHorizontalAlignment(JLabel.CENTER);
 
+        difficultyBox.setBounds(461, 215, 150, 30);
+        difficultyBox.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+
+        overlayPanel.add(difficultyLabel);
+        overlayPanel.add(difficultyBox);
+        //
         startButton = new JButton("GAME START");
         startButton.setBounds(411, 250, 250, 65);
         startButton.setFont(new Font("Serif", Font.BOLD, 25));
@@ -478,6 +492,17 @@ public class Practice extends JPanel {
         add(probabilityGraph);
         // 4. 시작 버튼 클릭 이벤트
         startButton.addActionListener(e -> {
+            // 선택한 난이도 적용
+            String selectedDifficulty =(String) difficultyBox.getSelectedItem();
+            if ("초급".equals(selectedDifficulty)) {
+                PracticeAI.setDifficulty(PracticeAI.Difficulty.BEGINNER);
+
+            } else if ("중급".equals(selectedDifficulty)) {
+                PracticeAI.setDifficulty(PracticeAI.Difficulty.INTERMEDIATE);
+
+            } else if ("고급".equals(selectedDifficulty)) {
+                PracticeAI.setDifficulty(PracticeAI.Difficulty.ADVANCED);
+            }
             // 오버레이 숨기기
             startButton.setEnabled(false);
             overlayPanel.setVisible(false);
@@ -520,7 +545,8 @@ public class Practice extends JPanel {
             //
             repaint();
         });
-
+        
+        //
         layeredPane.add(overlayPanel, JLayeredPane.PALETTE_LAYER);
         add(layeredPane);
         probabilityGraph.setVisible(false);
